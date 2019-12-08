@@ -181,7 +181,7 @@
   #contact_email {
     background-size: 5%;
   }  
-  .form-control:focus, #contact_email:focus, #contact_message:focus {
+  .form-control:focus, #contact_email:focus {
     border: none;
     background-color: lightskyblue;
     color: white;
@@ -191,6 +191,9 @@
     background: url(../img/email-icon.png) no-repeat;
     background-size: 30px;
     background-position: bottom 10px right 10px;
+  }
+  #contact_message:focus {
+    color: #000;
   }
   .submit-btn {
     background: transparent;
