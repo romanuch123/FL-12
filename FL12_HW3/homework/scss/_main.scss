@@ -1,0 +1,228 @@
+@mixin wraper {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+@mixin flexBox($horizontalPosition, $verticalPosition) {
+  display: flex;
+  justify-content: $horizontalPosition;
+  align-items: $verticalPosition;
+}
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+@mixin textSize($size, $weight) {
+  font-size: $size;
+  font-weight: $weight;
+}
+@mixin lineBehindText($widthLine, $weightLine) {
+  content: '';
+  display: block;
+  width: $widthLine;
+  border-bottom: $weightLine solid $underlineTextColor;
+  position: absolute;
+  z-index: -1;
+}
+html {
+  height: 100%;
+  body {
+    @extend html;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: map-get($fontMap , 'fontFresca'), sans-serif;
+    background-color: $contentBackground;
+  }
+}
+.header_button {
+  width: 170px;
+  height: 60px;
+  background: $btnColor;
+  color: $btnTextColor;
+  border: none;
+  border-radius: 3px;
+  @include textSize(20px, 100);
+  &:hover {
+    cursor: pointer;
+    background: lighten($btnColor, 10%);
+  }
+  &:active {
+    background: darken($btnColor, 10%);
+    border: 1px solid lighten($btnColor, 10%);
+  }
+  &:focus {
+    outline: none;
+  }
+}
+.login {
+  color: #fff;
+  margin-left: 150px;
+}
+.section_banner_button {
+  @extend .header_button;
+}
+.landing-logo{
+  @include flexBox(flex-start, center);
+  img {
+    width: 50px;
+  }
+  p {
+    @include textSize(35px, 600);
+    margin: 0 0 0 15px;
+    color: $headerTextcolor;
+    span {
+      @include textSize(15px, 100);
+      display: block;
+      text-align: center;
+    }
+  }
+}
+header {
+  background: $headerBGImg no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 900px;
+  border-bottom-right-radius: 40%;  
+  .header-wrap {
+    @include wraper;
+    & > p {
+      max-width: 800px;
+      color: $headerTextcolor;
+    }
+    .header_heading {
+      @include textSize(100px, bold);
+      position: relative;
+      margin: 60px 0 30px 0;
+      z-index: 1;
+      &::after {
+        @include lineBehindText(390px, 65px);
+        left: -5px;
+        bottom: 18px;
+      }
+    }
+    .header_text {
+      line-height: 25px;
+      white-space: pre-line;
+      font-size: 22px;
+      margin: 0 0 80px 0;
+      max-width: 100%;
+    }
+  }
+}
+main {
+  @include wraper;
+  position: relative;
+  text-align: center;
+  padding-bottom: 250px;
+  flex-grow: 1;
+  .section_text {
+    @include textSize(55px, 600);
+    display: inline-block;
+    color: $titleColor;
+    letter-spacing: 2px;
+    margin: 30px;
+    position: relative;
+    &::after {
+      @include lineBehindText(247px, 60px);
+      left: 293px;
+      bottom: 10px;
+    }
+  }
+  .section_card_wrap {
+    @include flexColumn;
+    .section_card {
+      @include flexBox(space-between, center);
+      margin: 0 auto;
+      width: 75%;
+      padding: 20px;
+      border-radius: 5px;
+      background: $cardColor;
+      margin-bottom: 30px;
+      .section_card_img {
+        width: 60%;
+      }
+      .section_card_right_container{
+        width: 100%;
+        .section_card_heading {
+          @include textSize(33px, 500);
+          color: $cardTitleColor;
+          display: inline-block;
+          position: relative;
+          z-index: 1;
+          .section_card_underline {
+            @include lineBehindText(100%, 18px);
+            left: 0;
+            bottom: 0;
+          }
+        }
+        .section_card_text {
+          @include textSize(21px, 100);
+          line-height: 30px;
+          color: $cardTextColor;
+          text-align: justify;
+          margin: 0 90px 30px 90px;
+        }
+        .section_link {
+          color: $cardTextColor;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  .section_banner{
+    @include flexBox(space-between, center);
+    margin: 0 auto;
+    background: $bannerGradient;
+    width: 77%;
+    height: 170px;
+    border-radius: 5px;
+    padding: 0 8% 0 8%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: -85px;
+    left: 11.5%;
+    .section_banner_text_wrap {
+      width: 70%;
+      text-align: left;
+      .section_banner_heading {
+        @include textSize(40px, bold);
+        color: $titleColor;
+        margin: 21px 0 21px 0;
+        position: relative;
+        z-index: 1;
+        &::after {
+          @include lineBehindText(84px, 65px);
+          left: 145px;
+          bottom: 0;
+        }
+      }
+      .section_banner_text {
+        @include textSize(21px, 100);
+        color: $bannerTextColor;
+      }
+    }
+  }
+}
+footer {
+  background: $footerColor;
+  color: $footerTextColor;
+  padding: 100px 0 30px 0;
+  .footer-wrap {
+    @include wraper;
+    @include flexBox(space-between, center);
+    .footer_logo {
+      p {
+        color: $footerTextColor;
+      }
+    }
+    .footer_text {
+      @extend .footer-cr;
+      width: 25%;
+    }
+    .footer-cr {
+      font-size: 19px;
+    }
+  }
+}
